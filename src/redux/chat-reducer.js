@@ -59,7 +59,6 @@ const chatReducer = (state = initialState, action) => {
         case DELETE_MESSAGE:
             return {...state, messages: state.messages.filter(p => p.id != action.id)}
         case EDIT_MESSAGE:
-            debugger;
             return {
                 ...state, messages: state.messages.map(p => (p.id === action.payload.id)?
                     {...p ,message: action.payload.newMessage} : p)
@@ -67,7 +66,7 @@ const chatReducer = (state = initialState, action) => {
         case REVERSE_MESSAGE:
             debugger
             return {
-                ...state, flood: action.body
+                ...state, messages: action.body
             }
         default:
             return state

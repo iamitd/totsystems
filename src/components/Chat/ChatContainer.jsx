@@ -15,8 +15,7 @@ class ChatContainer extends React.Component {
             containerId: "dialogarea"
         });
         if (this.props.chatPage.flood) {
-            this.props.chatPage.messages.reverse()
-            this.props.reverseMessageCreator(!this.props.flood)
+            this.props.reverseMessageCreator(this.props.chatPage.messages.reverse())
         }
 
     }
