@@ -1,0 +1,41 @@
+.img {
+    max-width:50px;
+    max-height:50px;
+    border-radius: 50%;
+}
+.message {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.messageItem {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+.nameAndEdit {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.editPanel {
+    display: none;
+}
+li:hover .editPanel {
+    display: block;
+}
+.editButton {
+    height: 21.6px;
+    width: 21.6px;
+    border: 0;
+    background: url("./../../../assets/images/edit.png") no-repeat;
+}
+.deleteButton {
+    height: 21.6px;
+    width: 21.6px;
+    border: 0;
+    background: url("./../../../assets/images/delete.png") no-repeat;
+}

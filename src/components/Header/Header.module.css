@@ -1,0 +1,46 @@
+.header {
+    height: 50px;
+    background-color: #27de92;
+    margin-bottom: 30px;
+    padding: 0 80px;
+}
+.headerNav {
+    height: inherit;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.headerNavLogo{
+    background-image: url("./../../assets/images/planktronics.png");
+    background-size: 150px 50px;
+    width: 150px;
+}
+.loginBlock {
+    height: 50px;
+    line-height: 50px;
+    width: inherit;
+    font-size: large;
+    color: white;
+    display: flex;
+    flex-direction: row;
+}
+.whenLoginBlock {
+    color: white;
+    line-height: 50px;
+    display: flex;
+    flex-direction: row;
+    font-size: large;
+}
+.whenLoginBlock .loginName {
+    margin-right: 50px;
+}
+.whenLoginBlock a {
+    width: 70px
+}
+.logout {
+
+}
