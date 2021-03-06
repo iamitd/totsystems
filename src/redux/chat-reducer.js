@@ -32,7 +32,7 @@ let initialState = {
         {id: 10, message: 'Здравствуйте', sender: 4},
         {id: 11, message: 'Всем привет', sender: 1},
         {id: 12, message: 'Slaaave', sender: 5},
-        {id: 13, message: 'Не листайте дальше. Данные 2 чата являются одним массивом но показываются с разных концов', sender: 1},
+        {id: 13, message: 'Не листайте дальше. Данные двух чатов являются одним массивом но показываются с разных концов', sender: 1},
         {id: 14, message: 'Всем привет, как вам погода?', sender: 2},
         {id: 15, message: 'Привет, супер', sender: 4},
         {id: 16, message: '«Разговор о погоде — последнее убежище людей, лишенных воображения» — Оскар Уайльд.', sender: 3},
@@ -44,8 +44,7 @@ let initialState = {
         {id: 22, message: 'Австралия является страной, в которой около 90% жителей поселили в своих домах кошек.', sender: 4},
         {id: 23, message: 'Сердце кошки бьется около 140 ударов в минуту. Для сравнения, человеческое сердце бьется в среднем 75 ударов в минуту.', sender: 1},
         {id: 24, message: 'У всех кошек дальнозоркость, поэтому им тяжело разглядеть предметы, находящиеся рядом.', sender: 5}
-    ],
-    flood: true
+    ]
 }
 const chatReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -64,7 +63,6 @@ const chatReducer = (state = initialState, action) => {
                     {...p ,message: action.payload.newMessage} : p)
             }
         case REVERSE_MESSAGE:
-            debugger
             return {
                 ...state, messages: action.body
             }
