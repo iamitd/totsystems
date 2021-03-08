@@ -7,6 +7,8 @@ import {
 } from "../../redux/chat-reducer";
 import Chat from "./Chat";
 import {animateScroll} from "react-scroll";
+import {withRouter} from "react-router";
+import {compose} from "redux";
 
 
 class ChatContainer extends React.Component {
@@ -14,7 +16,6 @@ class ChatContainer extends React.Component {
         animateScroll.scrollToBottom({
             containerId: "dialogarea"
         });
-        this.props.reverseMessageCreator(this.props.chatPage.messages.reverse())
 
     }
     componentDidUpdate() {
@@ -41,4 +42,4 @@ let mapDispatchToProps = (dispatch) =>{
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(ChatContainer)
+export default compose(connect(mapStateToProps,mapDispatchToProps),withRouter)(ChatContainer)

@@ -4,8 +4,12 @@ import s from './Chat.module.css';
 import AddMessageForm from "./AddMessageForm/AddMessageForm";
 
 const Chat = (props) => {
+    debugger;
     let state = props.chatPage;
     let messages = state.messages
+    if (props.history.location.pathname === "/work") {
+        messages = [...state.messages].reverse()
+    }
     let messagesElements = messages.map(m => <MessageItem user={state.users} message={m.message}
                                                                 sender={m.sender} userId={props.userId}
                                                                 delete={props.deleteMessage} messageId={m.id}
