@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {
     sendMessageCreator,
     deleteMessageCreator,
-    editMessageCreator, reverseMessageCreator
+    editMessageCreator
 } from "../../redux/chat-reducer";
 import Chat from "./Chat";
 import {animateScroll} from "react-scroll";
@@ -35,10 +35,9 @@ let mapStateToProps = (state) =>{
 }
 let mapDispatchToProps = (dispatch) =>{
     return {
-        sendMessage: (newMessageBody) => {dispatch(sendMessageCreator(newMessageBody)) },
-        deleteMessage: (id) => {dispatch(deleteMessageCreator(id))},
-        editMessage: (id,newMessage) => {dispatch(editMessageCreator(id,newMessage))},
-        reverseMessageCreator: (body) => {dispatch(reverseMessageCreator(body))}
+        sendMessage: (chatType,newMessageBody) => {dispatch(sendMessageCreator(chatType,newMessageBody)) },
+        deleteMessage: (chatType,id) => {dispatch(deleteMessageCreator(chatType,id))},
+        editMessage: (chatType,id,newMessage) => {dispatch(editMessageCreator(chatType,id,newMessage))}
     }
 }
 

@@ -2,13 +2,19 @@ import React, {useState}from "react";
 import s from './MessageItem.module.css';
 
 const MessageItem = (props) => {
+
     const editable = (props.sender - 1 == props.userId);
     let [editMode, setEditMode] = useState(false);
     let [editMessage, setEditMessage] = useState(props.message)
 
 
     const  deleteMessage = () => {
-        props.delete(props.messageId)
+        if (props.currentChat ==="/work") {
+            debugger
+        props.delete("work",props.messageId)
+        } else {
+            props.delete("flood",props.messageId)
+        }
     }
     const onMessageChange =(e) => {
         setEditMessage(e.currentTarget.value)
@@ -16,7 +22,12 @@ const MessageItem = (props) => {
     const activateEditMode =() => {
         setEditMode(!editMode);
         if (editMode) {
-            props.edit(props.messageId,editMessage);
+            if (props.currentChat ==="/work") {
+                debugger
+                props.edit("work",props.messageId,editMessage);
+            } else {
+                props.edit("flood",props.messageId,editMessage);
+            }
         }
     }
     const onKeyDown = e =>{

@@ -4,19 +4,23 @@ import s from './Chat.module.css';
 import AddMessageForm from "./AddMessageForm/AddMessageForm";
 
 const Chat = (props) => {
-    debugger;
     let state = props.chatPage;
-    let messages = state.messages
-    if (props.history.location.pathname === "/work") {
-        messages = [...state.messages].reverse()
+    let messages = state.messagesFlood;
+    let currentChat = props.history.location.pathname
+    if (currentChat === "/work") {
+        messages = state.messagesWork
     }
     let messagesElements = messages.map(m => <MessageItem user={state.users} message={m.message}
                                                                 sender={m.sender} userId={props.userId}
                                                                 delete={props.deleteMessage} messageId={m.id}
-    edit = {props.editMessage}/>)
+    edit = {props.editMessage} currentChat ={currentChat}/>)
     let addNewMessage = (values) => {
         if (!(values.newMessageBody === undefined)) {
-            props.sendMessage(values.newMessageBody)
+            if (currentChat === "/work") {
+                props.sendMessage("work",values.newMessageBody)
+            } else {
+                props.sendMessage("flood",values.newMessageBody)
+            }
         }
     }
     return (

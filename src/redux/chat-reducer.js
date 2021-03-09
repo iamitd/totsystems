@@ -19,20 +19,20 @@ let initialState = {
         },
         {senderId: 4, name: 'Katya', profileImg: "https://klike.net/uploads/posts/2019-03/1551511784_4.jpg"},
     ],
-    messages: [
-        {id: 1, message: 'Единогласно!', sender: 5},
-        {id: 2, message: 'Продаём', sender: 2},
-        {id: 3, message: 'Продаём', sender: 4},
-        {id: 4, message: 'Продаём', sender: 1},
-        {id: 5, message: 'Поступило предложение купить наш аллюминиевый завод. Что решаем?', sender: 5},
-        {id: 6, message: 'как же хочется работу', sender: 5},
-        {id: 7, message: 'Ноль идей', sender: 4},
-        {id: 8, message: 'Прошу прощения, тут принтер заживало… Не знаете как с этим справиться?', sender: 1},
-        {id: 9, message: 'Привет', sender: 3},
-        {id: 10, message: 'Здравствуйте', sender: 4},
-        {id: 11, message: 'Всем привет', sender: 1},
-        {id: 12, message: 'Slaaave', sender: 5},
-        {id: 13, message: 'Не листайте дальше. Данные двух чатов являются одним массивом но показываются с разных концов', sender: 1},
+    messagesFlood: [
+        {id: 1, message: 'У кого какие планы на выходные?', sender: 5},
+        {id: 2, message: 'Дома сидеть', sender: 2},
+        {id: 3, message: 'Нет планов', sender: 4},
+        {id: 4, message: 'А что?', sender: 1},
+        {id: 5, message: 'Подумала, может собраться вместе', sender: 5},
+        {id: 6, message: 'Я - за!', sender: 2},
+        {id: 7, message: 'Почему бы и нет', sender: 4},
+        {id: 8, message: 'Какие у вас любимые увлечения?', sender: 1},
+        {id: 9, message: 'Я очень люблю петь и танцевать.', sender: 3},
+        {id: 10, message: 'Обожая спорт', sender: 4},
+        {id: 11, message: 'Тоже люблю спорт', sender: 1},
+        {id: 12, message: 'Моё хобби - рисовать', sender: 5},
+        {id: 13, message: 'Ещё люблю фотографировать', sender: 1},
         {id: 14, message: 'Всем привет, как вам погода?', sender: 2},
         {id: 15, message: 'Привет, супер', sender: 4},
         {id: 16, message: '«Разговор о погоде — последнее убежище людей, лишенных воображения» — Оскар Уайльд.', sender: 3},
@@ -44,34 +44,72 @@ let initialState = {
         {id: 22, message: 'Австралия является страной, в которой около 90% жителей поселили в своих домах кошек.', sender: 4},
         {id: 23, message: 'Сердце кошки бьется около 140 ударов в минуту. Для сравнения, человеческое сердце бьется в среднем 75 ударов в минуту.', sender: 1},
         {id: 24, message: 'У всех кошек дальнозоркость, поэтому им тяжело разглядеть предметы, находящиеся рядом.', sender: 5}
+    ],
+    messagesWork: [
+        {id: 1, message: 'Это рабочий чат, сюда только по важным рабочим темам', sender: 5},
+        {id: 2, message: 'Принято', sender: 2},
+        {id: 3, message: 'Так точно!', sender: 4},
+        {id: 4, message: 'Вас понял!', sender: 1},
+        {id: 5, message: 'Вот и славненько', sender: 5},
+        {id: 6, message: 'как же хочется работу', sender: 5},
+        {id: 7, message: 'Прошу прощения, тут принтер заживало. Надо бы починить', sender: 4},
+        {id: 8, message: 'Разберёмся', sender: 1},
+        {id: 9, message: 'Как освобожусь - гляну', sender: 3},
+        {id: 10, message: 'Работа, работа, работа, работа, работа', sender: 4},
+        {id: 11, message: 'Работа, работа, работа, работа, работа', sender: 1},
+        {id: 12, message: 'Работа, работа, работа, работа, работа', sender: 5},
+        {id: 13, message: 'Фантазия кончается', sender: 1},
+        {id: 14, message: 'Фантазия кончилась', sender: 2},
+        {id: 15, message: 'Нужно 2 человека поработать в выходные, ставка х2.Есть желающие?', sender: 4},
+        {id: 16, message: '«Я хочу', sender: 3},
+        {id: 17, message: 'И я', sender: 2},
+        {id: 18, message: 'Вот и славно', sender: 4},
+        {id: 19, message: 'как же хочется работу', sender: 3},
+        {id: 20, message: 'Поступило предложение купить наш аллюминиевый завод. Что решаем?', sender: 1},
+        {id: 21, message: 'Продаём', sender: 3},
+        {id: 22, message: 'Продаём', sender: 4},
+        {id: 23, message: 'Продаём', sender: 1},
+        {id: 24, message: 'Единогласно!', sender: 5}
     ]
 }
 const chatReducer = (state = initialState, action) => {
+    const body = action.payload;
     switch (action.type) {
         case SEND_MESSAGE:
-            let body = action.newMessageBody;
+            if (body.chatType ==="work") {
             return {
                     ...state,
-                    newMessageBody: '',
-                    messages: [...state.messages, {id: state.messages.length + 1, message: body, sender: 1}]
+                    messagesWork: [...state.messagesWork, {id: state.messagesWork.length + 1, message: body.newMessageBody, sender: 1}]
                 }
-        case DELETE_MESSAGE:
-            return {...state, messages: state.messages.filter(p => p.id != action.id)}
-        case EDIT_MESSAGE:
-            return {
-                ...state, messages: state.messages.map(p => (p.id === action.payload.id)?
-                    {...p ,message: action.payload.newMessage} : p)
+            } else {
+                return {
+                    ...state,
+                    messagesFlood: [...state.messagesFlood, {id: state.messagesFlood.length + 1, message: body.newMessageBody, sender: 1}]
+                }
             }
-        case REVERSE_MESSAGE:
-            return {
-                ...state, messages: action.body
+        case DELETE_MESSAGE:
+            if (body.chatType ==="work") {
+                return {...state, messagesWork: state.messagesWork.filter(p => p.id != body.id)}
+            } else {
+                return {...state, messagesFlood: state.messagesFlood.filter(p => p.id != body.id)}
+            }
+        case EDIT_MESSAGE:
+            if (body.chatType === "work") {
+                return {
+                    ...state, messagesWork: state.messagesWork.map(p => (p.id === body.id) ?
+                        {...p, message: body.newMessage} : p)
+                }
+            } else {
+                return {
+                    ...state, messagesFlood: state.messagesFlood.map(p => (p.id === body.id) ?
+                        {...p, message: body.newMessage} : p)
+                }
             }
         default:
             return state
     }
 }
-export const sendMessageCreator = (newMessageBody) => ({type: SEND_MESSAGE, newMessageBody})
-export const deleteMessageCreator = (id) => ({type: DELETE_MESSAGE, id})
-export const editMessageCreator = (id,newMessage) => ({type: EDIT_MESSAGE, payload:{id,newMessage}})
-export const reverseMessageCreator = (body) => ({type: REVERSE_MESSAGE, body})
+export const sendMessageCreator = (chatType,newMessageBody) => ({type: SEND_MESSAGE, payload:{chatType,newMessageBody}})
+export const deleteMessageCreator = (chatType,id) => ({type: DELETE_MESSAGE,payload:{chatType,id}})
+export const editMessageCreator = (chatType,id,newMessage) => ({type: EDIT_MESSAGE, payload:{chatType,id,newMessage}})
 export default chatReducer
